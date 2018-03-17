@@ -77,7 +77,6 @@ body {
 /* main --s */
 main .card {
     max-width: 940px;
-    border: 1px solid red;
     margin: 0 auto;
     background-color: #fff;
 }
@@ -107,9 +106,6 @@ main .card .text .welcome .triangle {
     position: absolute;
     top: 100%;
     left: 4px;
-}
-main .card .text h1 {
-
 }
 main .card hr {
     height: 0;
