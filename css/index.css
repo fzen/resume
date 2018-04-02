@@ -53,13 +53,13 @@ body {
     float: right;
 }
 
-.topNavBar nav ul li {
+.topNavBar nav>ul>li {
     float: left;
     margin: 0 17px;
     position: relative;
 }
 
-.topNavBar nav ul li a {
+.topNavBar nav>ul>li>a {
 
     font-size: 12px;
     color: rgb(183, 183, 183);
@@ -69,7 +69,42 @@ body {
     font-weight: bold;
 }
 
-.topNavBar nav ul li.active::after {
+.topNavBar nav .submenu {
+    display: none;
+}
+
+.topNavBar nav li.active .submenu {
+    display: block;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background: white;
+    animation: submenuSlide .5s;
+}
+
+@keyframes submenuSlide {
+    0% {
+        right:100%;
+        opacity: 0;
+    }
+    100% {
+        right: 0;
+        opacity: 100%;
+    }
+}
+
+.topNavBar nav .submenu li{
+    white-space: nowrap;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.topNavBar nav .submenu li:hover {
+    background-color: yellowgreen;
+}
+
+.topNavBar nav>ul>li.active::after {
     content: '';
     display: block;
     height: 3px;
