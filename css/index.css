@@ -104,7 +104,9 @@ body {
     background-color: yellowgreen;
 }
 
-.topNavBar nav>ul>li.active::after {
+.topNavBar nav>ul>li.active::after,
+.topNavBar nav>ul>li.highlight::after,
+.topNavBar nav>ul>li.act::after{
     content: '';
     display: block;
     height: 3px;
