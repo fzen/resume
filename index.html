@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/loading.css">
     <link rel="stylesheet" href="./css/index.css">
     <script src="//at.alicdn.com/t/font_595047_mmfdog94owghkt9.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
     <style type="text/css">
         .icon {
            width: 1em; height: 1em;
@@ -200,11 +201,35 @@
     for (var i=0;i<a_length;i++){
         a[i].onclick = function (e){
             e.preventDefault();
+            if((typeof set)!=="undefined"){
+                clearInterval(set);
+            }
             var a = e.currentTarget;
             var targetId = a.getAttribute('href');
             var target = document.querySelector(targetId);
-            var offsetY = target.offsetTop;
-            window.scrollTo(0,offsetY-80);
+            var targetTop = target.offsetTop-80;
+            var currentTop = window.scrollY;
+            var t = Math.abs((targetTop-currentTop)/100*100); //每100px滑动300ms
+            if(t>500){
+                t=500;
+            }
+            function animate(time) {
+                requestAnimationFrame(animate);
+                TWEEN.update(time);
+            }
+            requestAnimationFrame(animate);
+
+            var coords = {
+                y:currentTop
+            }
+            var tween = new TWEEN.Tween(coords);
+            tween
+                .to({y:targetTop},t)
+                .easing(TWEEN.Easing.Quadratic.In)
+                .onUpdate(function(){
+                    window.scrollTo(0,coords.y);
+                })
+                .start();
         };
     }
 
