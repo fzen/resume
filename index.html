@@ -17,9 +17,9 @@
     </style>
 </head>
 <body>
-    <div id="siteWelcom" class="active">
+    <!-- <div id="siteWelcom" class="active">
         <div class="loading"></div>
-    </div>
+    </div> -->
 
     <div id="topNavBar" class="topNavBar clearfix">
         <div class="logo">
@@ -178,10 +178,10 @@
 
 <script>
     // loading动画
-    setTimeout(function(){
-        var siteWelcom = document.querySelector('#siteWelcom');
-        siteWelcom.classList.remove('active');
-    },2000);
+    // setTimeout(function(){
+    //     var siteWelcom = document.querySelector('#siteWelcom');
+    //     siteWelcom.classList.remove('active');
+    // },1000);
 
     // 顶部导航按钮，鼠标进入时下划线滑动出现
     var li = document.querySelectorAll('#topNavBar nav ul li');
@@ -234,7 +234,27 @@
         };
     }
 
-    // 页面滚动时，导航栏高亮,对应模块的导航标签激活
+    // 页面滚动时，导航栏高亮,对应模块的导航标签激活,对应模块去掉slide类产生动画
+        // 所有data-x类添加slide滑动动画类
+    var tag_with_data_x = document.querySelectorAll('[data-x]');
+    for(let i=0;i<tag_with_data_x.length;i++){
+        tag_with_data_x[i].classList.add('slide');
+    }
+        //载入页面时找到离页面顶部最近的data-x类滑动进入
+    var nearest = findNearest();
+    nearest.classList.remove('slide');
+
+    function findNearest(){
+        var tag_with_data_x = document.querySelectorAll('[data-x]');
+        var nearest = 0;
+        for(let i=1;i<tag_with_data_x.length;i++){
+            if(Math.abs(tag_with_data_x[i].offsetTop-window.scrollY)<Math.abs(tag_with_data_x[nearest].offsetTop-window.scrollY)){
+                nearest = i;
+            }
+        }
+        return tag_with_data_x[nearest];
+    }
+
     window.onscroll = function (){
         //  导航栏高亮
         var scrollY = window.scrollY;
@@ -246,23 +266,30 @@
             topNavBar.classList.add('scroll');
         }
         // 导航标签激活高亮
-        var tag_with_data_x = document.querySelectorAll('[data-x]');
-        var nearest = 0;var y = window.scrollY;
-        for(let i=1;i<tag_with_data_x.length;i++){
-            if(Math.abs(tag_with_data_x[i].offsetTop-window.scrollY)<Math.abs(tag_with_data_x[nearest].offsetTop-window.scrollY)){
-                nearest = i;
-            }
-        }
+        // var tag_with_data_x = document.querySelectorAll('[data-x]');
+        // var nearest = 0;
+        // for(let i=1;i<tag_with_data_x.length;i++){
+        //     if(Math.abs(tag_with_data_x[i].offsetTop-window.scrollY)<Math.abs(tag_with_data_x[nearest].offsetTop-window.scrollY)){
+        //         nearest = i;
+        //     }
+        // }
+        // tag_with_data_x[nearest].classList.remove('slide')
 
+            //滚轮滑动时找到离页面顶部最近的data-x类，滑动进入
+        var nearest = findNearest();
+        nearest.classList.remove('slide');
+            // 离页面顶部最近的data-x类对应的导航按钮高亮
+        var y = window.scrollY;
         var delay = setTimeout(function(){
             if(Math.abs(window.scrollY-y)>30){
                 clearTimeout(delay);
                 return;
             }
-            var id = tag_with_data_x[nearest].getAttribute("id");
+            var nearest = findNearest();
+            var id = nearest.getAttribute("id");
             var a = document.querySelector('a[href='+'"#'+id+'"]');
             var li = a.parentNode;
-            var brothers = li.parentNode.childNodes;console.log(brothers)
+            var brothers = li.parentNode.childNodes;
             for(let i=0;i<brothers.length;i++){
                 if(brothers[i].classList){
                     brothers[i].classList.remove('highlight');
