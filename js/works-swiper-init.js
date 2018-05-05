@@ -1,19 +1,28 @@
 !function () {
-    var mySwiper = new Swiper('.swiper-container', {
-        loop: true,
-        effect: 'cube',
-        speed: 1000,
-        autoplay: {
-            delay: 3000
+    var view = document.querySelector('.swiper-container')
+    var controller = {
+        view: null,
+        swiperOptions: {
+            loop: true,
+            effect: 'cube',
+            speed: 1000,
+            autoplay: {
+                delay: 3000
+            },
+            //分页器配置
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            //前进后退按钮配置
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
         },
-        //分页器配置
-        pagination: {
-            el: '.swiper-pagination',
+        init: function(view){
+            this.view = view
+            new Swiper(this.view,this.swiperOptions)
         },
-        //前进后退按钮配置
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    })
+    }
+    controller.init(view)
 }()

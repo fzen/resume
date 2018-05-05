@@ -1,37 +1,53 @@
 !function () {
-    // 点击导航按钮，滚动到对应位置
-    var a = document.querySelectorAll('#topNavBar nav ul li a');
-    var a_length = a.length;
-    for (var i = 0; i < a_length; i++) {
-        a[i].onclick = function (e) {
-            e.preventDefault();
-            var a = e.currentTarget;
-            var targetId = a.getAttribute('href');
-            var target = document.querySelector(targetId);
-            var targetTop = target.offsetTop - 80;
-            var currentTop = window.scrollY;
-            var t = Math.abs((targetTop - currentTop) / 100 * 200); //每100px滑动300ms
-            if (t > 500) {
-                t = 500;
-            }
-
+    var view = document.querySelector('#topNavBar')
+    var controller = {
+        view: null,
+        aTags: null,
+        initAnimation: function(){
             function animate(time) {
                 requestAnimationFrame(animate);
                 TWEEN.update(time);
             }
             requestAnimationFrame(animate);
-
-            var coords = {
-                y: currentTop
-            }
-            var tween = new TWEEN.Tween(coords);
+        },
+        scrollToTarget: function(coords,t){
+            var tween = new TWEEN.Tween(coords.from);
             tween
-                .to({ y: targetTop }, t)
+                .to(coords.to, t)
                 .easing(TWEEN.Easing.Quartic.InOut)
-                .onUpdate(function () {
-                    window.scrollTo(0, coords.y);
+                .onUpdate(function () {console.log(t,coords.from.y)
+                    window.scrollTo(0, coords.from.y);
                 })
                 .start();
-        };
+        },
+        bindEvent: function (aTags) {
+            for (var i = 0; i <aTags.length; i++) {
+                aTags[i].onclick = e => {
+                    e.preventDefault();
+                    var targetId = e.target.getAttribute('href');
+                    var target = document.querySelector(targetId);
+                    var targetY = target.offsetTop - 80;
+                    var currentY = window.scrollY;
+
+                    var coords = {
+                        from: {y: currentY},
+                        to: {y: targetY}
+                    }
+                    var t = Math.abs((targetY - currentY) / 100 * 200); //每100px滑动200ms
+                    if (t > 500) {
+                        t = 500;
+                    }
+                    
+                    this.scrollToTarget(coords,t)
+                }
+            }
+        },
+        init: function(view){
+            this.view = view
+            this.aTags = view.querySelectorAll('nav>ul>li>a')
+            this.initAnimation()
+            this.bindEvent(this.aTags)
+        }
     }
+    controller.init(view)
 }()
