@@ -5,6 +5,8 @@
     <title>resume of fengzhen</title>
     <link rel="stylesheet" href="./css/loading.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.min.js"></script>
     <script src="//at.alicdn.com/t/font_595047_mmfdog94owghkt9.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
     <style type="text/css">
@@ -17,6 +19,7 @@
     </style>
 </head>
 <body>
+    <!-- loading动画 -->
     <!-- <div id="siteWelcom" class="active">
         <div class="loading"></div>
     </div> -->
@@ -164,17 +167,31 @@
             </div>
         </nav>
         <div class="jobs">
-            <div class="jobs1">
-                <img src="./image/1.jpg" alt="作品1">
-            </div>
-            <div class="jobs2">
-                <img src="./image/2.jpg" alt="作品2">
-            </div>
-            <div class="jobs3">
-                <img src="./image/3.jpg" alt="作品3">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><a href="#"><img src="./image/works1.jpeg" alt=""></a></div>
+                    <div class="swiper-slide"><a href="#"><img src="./image/works2.jpeg" alt=""></a></div>
+                    <!-- <div class="swiper-slide"><a href="#"><img src="./image/works3" alt=""></a></div> -->
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+                
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                
             </div>
         </div>
     </section>
+
+<script src="./js/top-nav-activate-by-mouse.js"></script>
+<script src="./js/auto-scroll-when-click-nav.js"></script>
+<script src="./js/sections-auto-slide-up.js"></script>
+<script src="./js/nav-highlight-when-scroll.js"></script>
+<script src="./js/sticky-navbar.js"></script>
+<script src="./js/works-nav-activate-by-click.js"></script>
+<script src="./js/works-swiper-init.js"></script>
+
 
 <script>
     // loading动画
@@ -182,146 +199,6 @@
     //     var siteWelcom = document.querySelector('#siteWelcom');
     //     siteWelcom.classList.remove('active');
     // },1000);
-
-    // 顶部导航按钮，鼠标进入时下划线滑动出现
-    var li = document.querySelectorAll('#topNavBar nav ul li');
-    var li_length = li.length;
-    for (var i=0;i<li_length;i++){
-        li[i].onmouseenter = function (e){
-            e.currentTarget.classList.add('active');
-        };
-        li[i].onmouseleave = function (e){
-            e.currentTarget.classList.remove('active');
-        };
-    }
-
-    // 点击导航按钮，滚动到对应位置
-    var a = document.querySelectorAll('#topNavBar nav ul li a');
-    var a_length = a.length;
-    for (var i=0;i<a_length;i++){
-        a[i].onclick = function (e){
-            e.preventDefault();
-            if((typeof set)!=="undefined"){
-                clearInterval(set);
-            }
-            var a = e.currentTarget;                                 
-            var targetId = a.getAttribute('href');
-            var target = document.querySelector(targetId);
-            var targetTop = target.offsetTop-80;
-            var currentTop = window.scrollY;
-            var t = Math.abs((targetTop-currentTop)/100*200); //每100px滑动300ms
-            if(t>500){
-                t=500;
-            }
-            
-            function animate(time) {
-                requestAnimationFrame(animate);
-                TWEEN.update(time);
-            }
-            requestAnimationFrame(animate);
-
-            var coords = {
-                y:currentTop
-            }
-            var tween = new TWEEN.Tween(coords);
-            tween
-                .to({y:targetTop},t)
-                .easing(TWEEN.Easing.Quartic.InOut)
-                .onUpdate(function(){
-                    window.scrollTo(0,coords.y);
-                })
-                .start();
-        };
-    }
-
-    // 页面滚动时，导航栏高亮,对应模块的导航标签激活,对应模块去掉slide类产生动画
-        // 所有data-x类添加slide滑动动画类
-    var tag_with_data_x = document.querySelectorAll('[data-x]');
-    for(let i=0;i<tag_with_data_x.length;i++){
-        tag_with_data_x[i].classList.add('slide');
-    }
-        //载入页面时找到离页面顶部最近的data-x类滑动进入
-    var nearest = findNearest();
-    nearest.classList.remove('slide');
-
-    function findNearest(){
-        var tag_with_data_x = document.querySelectorAll('[data-x]');
-        var nearest = 0;
-        for(let i=1;i<tag_with_data_x.length;i++){
-            if(Math.abs(tag_with_data_x[i].offsetTop-window.scrollY)<Math.abs(tag_with_data_x[nearest].offsetTop-window.scrollY)){
-                nearest = i;
-            }
-        }
-        return tag_with_data_x[nearest];
-    }
-
-    window.onscroll = function (){
-        //  导航栏高亮
-        var scrollY = window.scrollY;
-        if (scrollY===0){
-            var topNavBar = document.querySelector('#topNavBar');
-            topNavBar.classList.remove('scroll');
-        }else {
-            var topNavBar = document.querySelector('#topNavBar');
-            topNavBar.classList.add('scroll');
-        }
-        // 导航标签激活高亮
-        // var tag_with_data_x = document.querySelectorAll('[data-x]');
-        // var nearest = 0;
-        // for(let i=1;i<tag_with_data_x.length;i++){
-        //     if(Math.abs(tag_with_data_x[i].offsetTop-window.scrollY)<Math.abs(tag_with_data_x[nearest].offsetTop-window.scrollY)){
-        //         nearest = i;
-        //     }
-        // }
-        // tag_with_data_x[nearest].classList.remove('slide')
-
-            //滚轮滑动时找到离页面顶部最近的data-x类，滑动进入
-        var nearest = findNearest();
-        nearest.classList.remove('slide');
-            // 离页面顶部最近的data-x类对应的导航按钮高亮
-        var y = window.scrollY;
-        var delay = setTimeout(function(){
-            if(Math.abs(window.scrollY-y)>30){
-                clearTimeout(delay);
-                return;
-            }
-            var nearest = findNearest();
-            var id = nearest.getAttribute("id");
-            var a = document.querySelector('a[href='+'"#'+id+'"]');
-            var li = a.parentNode;
-            var brothers = li.parentNode.childNodes;
-            for(let i=0;i<brothers.length;i++){
-                if(brothers[i].classList){
-                    brothers[i].classList.remove('highlight');
-                }    
-            }
-            li.classList.add('highlight');
-        },0);
-
-        // var id = tag_with_data_x[nearest].getAttribute("id");
-        // var a = document.querySelector('a[href='+'"#'+id+'"]');
-        // var li = a.parentNode;
-        // var brothers = li.parentNode.childNodes;console.log(brothers)
-        // for(let i=0;i<brothers.length;i++){
-        //     if(brothers[i].classList){
-        //         brothers[i].classList.remove('highlight');
-        //     }    
-        // }
-        // li.classList.add('highlight');
-    }
-
-    // 作品集导航按钮，点击时下划线滑动
-    works1.onclick = function(){
-        decorationItem.className = "item item1";
-    }
-    works2.onclick = function(){
-        decorationItem.className = "item item2";
-    }
-    works3.onclick = function(){
-        decorationItem.className = "item item3";
-    }
-
 </script>
-
 </body>
 </html>

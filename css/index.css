@@ -372,30 +372,3 @@ section.works nav .decorationBar .item3 {
     width:165px;
     margin-left: 156px;
 }
-
-section.works .jobs {
-    position: relative;
-    font-size: 0px;
-    height: 597px;
-}
-
-section.works .jobs1,
-section.works .jobs2,
-section.works .jobs3 {
-    position: absolute;
-}
-
-section.works .jobs1 {
-    top: 0;
-    left: 0;
-}
-
-section.works .jobs2 {
-    top: 0;
-    right: 0;
-}
-
-section.works .jobs3 {
-    bottom: 0;
-    right: 0;
-}
