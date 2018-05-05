@@ -1,11 +1,13 @@
-// 顶部导航按钮，鼠标进入时添加active类，控制下划线和二级菜单出现，鼠标移出删除active类
-var li = document.querySelectorAll('#topNavBar nav ul li');
-var li_length = li.length;
-for (var i=0;i<li_length;i++){
-    li[i].onmouseenter = function (e){
-        e.currentTarget.classList.add('active');
-    };
-    li[i].onmouseleave = function (e){
-        e.currentTarget.classList.remove('active');
-    };
-}
+!function () {
+    // 顶部导航按钮，鼠标进入时添加active类，控制下划线和二级菜单出现，鼠标移出删除active类
+    var li = document.querySelectorAll('#topNavBar nav ul li');
+    var li_length = li.length;
+    for (var i = 0; i < li_length; i++) {
+        li[i].onmouseenter = function (e) {
+            e.currentTarget.classList.add('active');
+        };
+        li[i].onmouseleave = function (e) {
+            e.currentTarget.classList.remove('active');
+        };
+    }
+}()
