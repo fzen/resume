@@ -36,6 +36,7 @@
         init: function(view){
             this.view = view
             this.bindEvent()
+            window.scrollTo(0,1)
         }
     }
     controller.init(view)

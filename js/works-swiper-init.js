@@ -7,6 +7,7 @@
             effect: 'cube',
             speed: 1000,
             autoplay: {
+                disableOnInteraction: false,
                 delay: 3000
             },
             //分页器配置

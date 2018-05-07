@@ -328,7 +328,7 @@ section.slide.skills .exp {
 /* skills --end */
 /* works --s */
 section.works {
-    max-width: 940px;
+    margin-bottom: 60px;
 }
 
 section.works nav ol {
@@ -371,4 +371,60 @@ section.works nav .decorationBar .item2 {
 section.works nav .decorationBar .item3 {
     width:165px;
     margin-left: 156px;
+}
+/* works --end */
+/* messageBoard --s */
+section.messageBoard {
+    background-color: wheat;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+    margin-bottom: 60px;
+}
+section.messageBoard>h2 {
+    padding-top: 30px;
+}
+section.messageBoard>ol {
+    margin: 0 50px 50px 50px;
+}
+section.messageBoard>ol>li{
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 0 2px wheat;
+}
+section.messageBoard>ol>li>span {
+    color: turquoise;
+}
+section.messageBoard>ol>li>p{
+    margin: 0 60px;
+}
+section.messageBoard>form {
+    /* margin: 0 50px; */
+    padding: 50px;
+    vertical-align: bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: darkseagreen; */
+    background: linear-gradient(to top,wheat,darkseagreen);
+    position: relative;
+}
+section.messageBoard>form textarea {
+    width: calc(100% - 40px);
+    line-height: 1.5em;
+    height: 200px;
+    padding: 20px;
+}
+section.messageBoard>form input {
+    text-align: center;
+    height: 30px;
+    width: 200px;
+    margin: 20px 0 5px 0;
+}
+section.messageBoard>form button {
+    height: 34px;
+    width: 204px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }

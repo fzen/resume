@@ -26,7 +26,7 @@
                     e.preventDefault();
                     var targetId = e.target.getAttribute('href');
                     var target = document.querySelector(targetId);
-                    var targetY = target.offsetTop - 80;
+                    var targetY = target.offsetTop - 91;
                     var currentY = window.scrollY;
 
                     var coords = {
