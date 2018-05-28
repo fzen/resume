@@ -343,7 +343,7 @@ section.works nav li {
     font-size: 16px;  
 }
 
-section.works nav .decorationBar {
+/* section.works nav .decorationBar {
     width: 320px;
     height: 5px;
     margin: 5px auto;
@@ -371,7 +371,7 @@ section.works nav .decorationBar .item2 {
 section.works nav .decorationBar .item3 {
     width:165px;
     margin-left: 156px;
-}
+} */
 /* works --end */
 /* messageBoard --s */
 section.messageBoard {
