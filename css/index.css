@@ -295,7 +295,6 @@ section.skills ol li {
     width: 50%;
     padding-bottom: 26px;
 }
-
 section.skills ol li:nth-child(odd) {
     padding-left: 50px;
     padding-right: 25px;
@@ -321,6 +320,12 @@ section.skills .exp {
     transition: all 2s;
 }
 
+section.skills li:nth-of-type(1) .exp,
+section.skills li:nth-of-type(2) .exp,
+section.skills li:nth-of-type(3) .exp {
+    width: 75%;
+}
+
 section.slide.skills .exp {
     transform: translate(-100%);
 }
@@ -342,36 +347,6 @@ section.works nav li {
     padding: 0 21px;
     font-size: 16px;  
 }
-
-/* section.works nav .decorationBar {
-    width: 320px;
-    height: 5px;
-    margin: 5px auto;
-    margin-bottom: 27px;
-    background-color: #FFFFFF;
-    border-radius: 2px;
-}
-
-section.works nav .decorationBar .item {
-    height: 100%;
-    background-color: #E6686A;
-    transition: all 0.3s;
-    border-radius: 2px;
-}
-
-section.works nav .decorationBar .item1 {
-    width:40px;
-}
-
-section.works nav .decorationBar .item2 {
-    width:40px;
-    margin-left: 78px;
-}
-
-section.works nav .decorationBar .item3 {
-    width:165px;
-    margin-left: 156px;
-} */
 /* works --end */
 /* messageBoard --s */
 section.messageBoard {
